@@ -9,7 +9,7 @@ router = APIRouter(prefix="/employees", tags=["Employees"])
 async def create_employee(req: EmployeeRequest):
     employee = EmployeeModel(
         employee_name=req.employee_name,
-        employee_company=req.employee_company
+        employee_company=req.employee_company  # company_id
     )
     return await EmployeeRepo.create(employee)
 

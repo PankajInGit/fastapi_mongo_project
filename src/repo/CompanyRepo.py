@@ -11,11 +11,12 @@ class CompanyRepo:
 
     @staticmethod
     async def list_all():
-        return await CompanyRepo.collection.find().to_list(100)
+        companies = await CompanyRepo.collection.find({}, {"_id": 0}).to_list(100)
+        return companies
 
     @staticmethod
     async def get_by_id(company_id: str):
-        return await CompanyRepo.collection.find_one({"company_id": company_id})
+        return await CompanyRepo.collection.find_one({"company_id": company_id}, {"_id": 0})
 
     @staticmethod
     async def update(company_id: str, data: dict):

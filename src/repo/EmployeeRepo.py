@@ -11,11 +11,12 @@ class EmployeeRepo:
 
     @staticmethod
     async def list_all():
-        return await EmployeeRepo.collection.find().to_list(100)
+        employees = await EmployeeRepo.collection.find({}, {"_id": 0}).to_list(100)
+        return employees
 
     @staticmethod
     async def get_by_id(employee_id: str):
-        return await EmployeeRepo.collection.find_one({"employee_id": employee_id})
+        return await EmployeeRepo.collection.find_one({"employee_id": employee_id}, {"_id": 0})
 
     @staticmethod
     async def update(employee_id: str, data: dict):
